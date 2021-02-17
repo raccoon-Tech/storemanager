@@ -28,7 +28,7 @@ include_once (ROOT_PATH . "/model/display_product.php");
 </div>
 <!-- Add Product modal trigger -->
 <div class="container text-right h6 mt-4">
-<a href="" data-toggle="modal"data-target="#addProduct">Add product
+<a href="#" data-toggle="modal"data-target="#addProduct">Add product
 <i class="fa fa-plus-circle"></i>
 </a>
 </div>
@@ -42,20 +42,20 @@ include_once (ROOT_PATH . "/model/display_product.php");
 <span aria-hidden="true">&times;</span>
 </button>
 </div>
-<div class="modal-body">
+<div class="modal-body"> 
 <form action="model/add_product.php" method="post">
 <label for=""><b>Product name:</b></label>
-<input type="text" name="prod_name" id="" class="form-control" >
+<input type="text" name="prod_name" id="" class="form-control"  required>
 <label for=""><b>Product category:</b></label>
-<input type="text" name="prod_category" id="" class="form-control" >
+<input type="text" name="prod_category" id="" class="form-control" required >
 <label for=""><b>Product cost price:</b></label>
-<input type="number" name="prod_c_price" id="" class="form-control" >
+<input type="number" name="prod_c_price" id="" class="form-control" required >
 <label for=""><b>Product Selling price:</b></label>
-<input type="number" name="prod_s_price" id="" class="form-control" >
+<input type="number" name="prod_s_price" id="" class="form-control" required >
 <label for=""><b>Product Quality:</b></label>
-<input type="text" name="prod_quality" id="" class="form-control" >
+<input type="text" name="prod_quality" id="" class="form-control" required >
 <label for=""><b>Product serial number:</b></label>
-<input type="text" name="prod_id" id="" class="form-control" >
+<input type="text" name="prod_id" id="" class="form-control" required >
 
 
 
@@ -80,7 +80,7 @@ include_once (ROOT_PATH . "/model/display_product.php");
 </div>
 <!-- product Table -->
 <div class="container-fluid table-responsive-md">
-<table class="table table-dark table-striped">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th scope="col">ID</th>
@@ -94,28 +94,37 @@ include_once (ROOT_PATH . "/model/display_product.php");
 <th scope="col"></th>
 <th scope="col"></th>
 
-
 </tr>
 </thead>
-<?php while($row = $result->FETCH_ASSOC()){?>
-
 <tbody>
+
+<?php 
+$data = $select_db_data;
+foreach($data as $row){?>
+   
 <tr>
-<td><?php $row['product_id']; }?></td>
-<td>stats book</td>
 
-<td>Books</td>
-<td>500</td>
-<td>1000</td>
+<td><?php echo $row['id'];?></td>
+ <td><?php echo $row['product_name'];?></td>
+
+<td><?php echo $row['product_category'];?></td>
+  
+<td><?php echo $row['product_cost_price'];?></td>
+<td><?php echo $row['product_price'];?></td>
 <td>25 psc</td>
-<td>grade A</td>
-<td><a href=""class="text-danger">Remove</a></td>
-<td><a href=""class="text-success">Edit</button></td>
+<td><?php echo $row['product_quality'];?></td>
+<td><a href="model/remove_product.php?id='<?php echo $row['id']?>'"class="text-danger">Remove</a></td>
+<td><a href="update_product_form.php?edit='<?php echo $row['id']?>'"class="text-success">Edit</a></td>
 </tr>
+<?php }?>
 
+
+
+ 
 </tbody>
 
 </table>
+
 <!-- table pagination -->
 <nav arial-label="...">
 <ul class="pagination ">

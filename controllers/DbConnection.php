@@ -46,6 +46,17 @@ $stmt = $this->executeStatement($statement,$parameters );
     
 }
 }
+// display
+
+public function display($statement="",$parameters = []){
+    try {
+    $stmt = $this->executeStatement($statement,$parameters );
+        return $stmt->fetchAll();
+    } catch (Exeption $e) {
+        throw new Exception($e->getMessage());
+        
+    }
+    }
 // update a row/s in databse table
 public function update($statement="",$parameters = []){
     try {
